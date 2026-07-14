@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome!</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(45deg, #ff0080, #7928ca, #00d4ff);
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      animation: bg 5s infinite alternate;
+    }
 
+    @keyframes bg {
+      from { filter: hue-rotate(0deg); }
+      to { filter: hue-rotate(360deg); }
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+  </style>
+</head>
+<body>
+
+<div id="main">
+  <button onclick="start()">Click Me!</button>
+</div>
+
+<script>
+function start() {
+  const name = prompt("What's your name?");
+  document.getElementById("main").innerHTML =
+    `<h1>😂 Fuck you, ${name}!</h1>`;
+}
+</script>
+
+</body>
+</html>
