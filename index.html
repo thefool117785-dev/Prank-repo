@@ -1,51 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Welcome!</title>
-  <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: linear-gradient(45deg, #ff0080, #7928ca, #00d4ff);
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      animation: bg 5s infinite alternate;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Totally Friendly Website 😄</title>
 
-    @keyframes bg {
-      from { filter: hue-rotate(0deg); }
-      to { filter: hue-rotate(360deg); }
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#ff0066,#7b2ff7,#00c6ff,#00ff99);
+    background-size:400% 400%;
+    animation:bgMove 8s ease infinite;
+    color:white;
+    text-align:center;
+}
 
-    h1 {
-      font-size: 3em;
-    }
-  </style>
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+    padding:40px;
+}
+
+h1{
+    font-size:3em;
+    text-shadow:0 0 20px white;
+}
+
+p{
+    margin-top:15px;
+    font-size:20px;
+}
+
+button{
+    margin-top:25px;
+    padding:15px 35px;
+    font-size:22px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    background:white;
+    color:#7b2ff7;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+.flash{
+    animation:flash .3s infinite;
+}
+
+@keyframes flash{
+50%{
+opacity:.2;
+}
+}
+
+.shake{
+animation:shake .08s infinite;
+}
+
+@keyframes shake{
+0%{transform:translate(3px,2px);}
+25%{transform:translate(-3px,-2px);}
+50%{transform:translate(3px,-2px);}
+75%{transform:translate(-3px,2px);}
+100%{transform:translate(3px,2px);}
+}
+</style>
+
 </head>
 <body>
 
-<div id="main">
-  <button onclick="start()">Click Me!</button>
+<div class="container" id="main">
+<h1>🎁 Surprise!</h1>
+<p>Click the button below.</p>
+
+<button onclick="start()">Start</button>
 </div>
 
 <script>
-function start() {
-  const name = prompt("What's your name?");
-  document.getElementById("main").innerHTML =
-    `<h1>😂 Fuck you, ${name}!</h1>`;
+
+function start(){
+
+let name=prompt("What's your name?");
+
+if(!name)return;
+
+let clean=name.trim().toLowerCase();
+
+let blocked=[
+"fool",
+"thefool"
+];
+
+if(blocked.includes(clean)){
+
+document.body.classList.add("shake");
+
+document.getElementById("main").innerHTML=`
+<h1>🔍 Scanning...</h1>
+<p>Please wait...</p>
+`;
+
+setTimeout(()=>{
+
+document.body.classList.remove("shake");
+document.body.classList.add("flash");
+
+document.getElementById("main").innerHTML=`
+<h1>🚫 Nice try 😏</h1>
+<p>I know who you are.</p>
+<h2>Access Denied.</h2>
+`;
+
+},2500);
+
+return;
+
 }
+
+document.getElementById("main").innerHTML=`
+<h1>😂</h1>
+<h1>Fuck you, ${name}!</h1>
+`;
+
+}
+
 </script>
 
 </body>
