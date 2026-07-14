@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Totally Friendly Website 😄</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+
+      /* rainbow bg, looks cooler moving */
+      background: linear-gradient(-45deg, #ff0066, #7b2ff7, #00c6ff, #00ff99);
+      background-size: 400% 400%;
+      animation: bgMove 8s ease infinite;
+    }
+
+    @keyframes bgMove {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-shadow: 0 0 20px white;
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 20px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 15px 35px;
+      font-size: 22px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      background: white;
+      color: #7b2ff7;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* used when we "detect" the target */
+    .flash {
+      animation: flash 0.3s infinite;
+    }
+    @keyframes flash {
+      50% { opacity: 0.2; }
+    }
+
+    .shake {
+      animation: shake 0.08s infinite;
+    }
+    @keyframes shake {
+      0%   { transform: translate(3px, 2px); }
+      25%  { transform: translate(-3px, -2px); }
+      50%  { transform: translate(3px, -2px); }
+      75%  { transform: translate(-3px, 2px); }
+      100% { transform: translate(3px, 2px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="main">
+    <h1>🎁 Surprise!</h1>
+    <p>Click the button below.</p>
+    <button onclick="start()">Start</button>
+  </div>
+
+  <script>
+    // names that trigger the "gotcha" screen instead of the normal message
+    var blockedNames = ["fool", "thefool"];
+
+    function start() {
+      var name = prompt("What's your name?");
+      if (!name) return;
+
+      var clean = name.trim().toLowerCase();
+
+      if (blockedNames.indexOf(clean) !== -1) {
+        fakeScan();
+        return;
+      }
+
+      // normal (not-so-nice) message
+      document.getElementById("main").innerHTML =
+        "<h1>😂</h1><h1>Fuck you, " + name + "!</h1>";
+    }
+
+    function fakeScan() {
+      var main = document.getElementById("main");
+
+      document.body.classList.add("shake");
+      main.innerHTML = "<h1>🔍 Scanning...</h1><p>Please wait...</p>";
+
+      // fake "processing" delay before the reveal
+      setTimeout(function () {
+        document.body.classList.remove("shake");
+        document.body.classList.add("flash");
+
+        main.innerHTML =
+          "<h1>🚫 Ohh, you mean boss fool??? 😏</h1><p>I know who you are.</p><h2>Access Denied.</h2>";
+      }, 2500);
+    }
+  </script>
+
+</body>
+</html>
